@@ -25,11 +25,21 @@ export default class {
             TEMPLATE.STATION_TABLE(this.subWayManager.getStations());
     }
     
+    renderLineManageTab() {
+        $(SELECTORS.MAIN).innerHTML = TEMPLATE.LINE_MANAGER_TAB(
+            this.subWayManager.stations,
+            this.subWayManager.lines,
+        );
+    }
+    
     registerHeaderClickEvent() {
         $(SELECTORS.APP).addEventListener("click", (e) => {
             e.preventDefault();
             if (e.target.id === SELECTORS.STATION_MANAGER_BUTTON) {
                 this.renderStationManageTab();
+            }
+            if (e.target.id === SELECTORS.LINE_MANAGER_BUTTON) {
+                this.renderLineManageTab();
             }
         });
     }
@@ -46,7 +56,27 @@ export default class {
         });
     }
     
+    registerLineManageClickEvent(addLine, DeleteLine) {
+        $(SELECTORS.MAIN).addEventListener("click", (e) => {
+            e.preventDefault();
+            if (e.target.id === SELECTORS.LINE_ADD_BUTTON) {
+                addLine({
+                    name: $(SELECTORS.LINE_NAME_INPUT).value,
+                    start: $(SELECTORS.LINE_START_STATION_SELECTOR).value,
+                    end: $(SELECTORS.LINE_END_STATION_SELECTOR).value,
+                });
+            }
+            if (e.target.className === SELECTORS.LINE_DELETE_BUTTON) {
+                DeleteLine(e.target.dataset.idx);
+            }
+        });
+    }
+    
     alert(msg) {
         alert(msg);
+    }
+    
+    confirm(msg) {
+        return confirm(msg);
     }
 }

@@ -11,10 +11,14 @@ class App {
             this.requestAddStation,
             this.requestDeleteStation,
         );
+        this.view.registerLineManageClickEvent(
+            this.requestAddLine,
+            this.requestDeleteLine,
+        )
     }
     
     requestAddStation = (stationName) => {
-        if (this.validName(stationName)) {
+        if (this.validStationName(stationName)) {
             return;
         }
         this.subwayManager.addStation(stationName);
@@ -22,16 +26,56 @@ class App {
     }
     
     requestDeleteStation = (idx) => {
+        if (this.subwayManager.stations[ idx ].isInlined) {
+            this.view.alert(ERROR_MSG.INLINED_STATION);
+            return
+        }
+        if (!this.view.confirm("정말 삭제하시겠습니까?")) {
+            return
+        }
         this.subwayManager.deleteStation(idx);
         this.view.renderStationManageTab();
     }
     
-    validName(name) {
+    requestAddLine = (lineInfo) => {
+        if (this.validLineInfo(lineInfo)) {
+            return;
+        }
+        this.subwayManager.addLine(lineInfo);
+        this.view.renderLineManageTab();
+    }
+    
+    requestDeleteLine = (idx) => {
+        this.subwayManager.deleteLine(idx);
+        this.view.renderLineManageTab();
+    }
+    
+    validStationName(name) {
         if (isInValidNameLength(name)) {
             this.view.alert(ERROR_MSG.INVALID_NAME_LENGTH)
             return true;
         }
         if (isNotDuplicatedName(name, this.subwayManager.getStations())) {
+            this.view.alert(ERROR_MSG.DUPLICATED_NAME);
+            return true;
+        }
+        return false;
+    }
+    
+    validLineInfo(lineInfo) {
+        if (lineInfo.name.length === 0) {
+            this.view.alert(ERROR_MSG.EMPTY_LINE_NAME);
+            return true;
+        }
+        if (this.subwayManager.stations.length < 2) {
+            this.view.alert(ERROR_MSG.NOT_ENOUGH_STATION);
+            return true;
+        }
+        if (lineInfo.start === lineInfo.end) {
+            this.view.alert(ERROR_MSG.SAME_START_END_STATION);
+            return true;
+        }
+        if (isNotDuplicatedName(lineInfo.name, this.subwayManager.lines)) {
             this.view.alert(ERROR_MSG.DUPLICATED_NAME);
             return true;
         }
