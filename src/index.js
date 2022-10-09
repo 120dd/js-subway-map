@@ -18,6 +18,7 @@ class App {
         this.view.registerSectionManageClickEvent(
             this.requestChangeCurrentManageLine,
             this.requestAddSection,
+            this.requestDeleteSection
         );
     }
     
@@ -56,6 +57,11 @@ class App {
     
     requestAddSection = (station, idx) => {
         this.subwayManager.addSection(station, idx);
+        this.view.renderSectionManageDetatil();
+    }
+    
+    requestDeleteSection = (idx) => {
+        this.subwayManager.deleteSection(idx);
         this.view.renderSectionManageDetatil();
     }
     

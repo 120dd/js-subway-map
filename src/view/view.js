@@ -90,7 +90,7 @@ export default class {
         });
     }
     
-    registerSectionManageClickEvent(changeCurrentLine, addSection) {
+    registerSectionManageClickEvent(changeCurrentLine, addSection, deleteSection) {
         $(SELECTORS.MAIN).addEventListener("click", (e) => {
             e.preventDefault();
             if (e.target.className === SELECTORS.SECTION_LINE_MENU_BUTTON) {
@@ -101,6 +101,9 @@ export default class {
                     $(SELECTORS.SECTION_STATION_SELECTOR).value,
                     $(SELECTORS.SECTION_ORDER_INPUT).value
                 );
+            }
+            if (e.target.className === SELECTORS.SECTION_DELETE_BUTTON) {
+                deleteSection(e.target.dataset.idx);
             }
         });
     }

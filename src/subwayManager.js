@@ -42,11 +42,16 @@ export default class SubwayManager {
         targetLine.line.splice(idx, 0, targetStation);
     }
     
+    deleteSection(idx) {
+        const targetLine = this.lines.find(line => line.name === this.currentManagingLine);
+        targetLine.line.splice(idx, 1);
+    }
+    
     getStations() {
         return this.stations;
     }
     
-    changeCurrentLine = (lineName) => {
+    changeCurrentLine(lineName) {
         this.currentManagingLine = lineName;
         return this.currentManagingLine;
     }
