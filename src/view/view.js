@@ -32,6 +32,21 @@ export default class {
         );
     }
     
+    renderSectionManageTab() {
+        $(SELECTORS.MAIN).innerHTML = TEMPLATE.SECTION_MANAGE_TAB(this.subWayManager.lines);
+    }
+    
+    renderSectionManageDetatil() {
+        const containedStation = this.subWayManager.lines
+        .filter(v => v.name === this.subWayManager.currentManagingLine)[ 0 ].line;
+        $(SELECTORS.SECTION_DETAIL).innerHTML = TEMPLATE.SECTION_DETAIL(
+            this.subWayManager.currentManagingLine,
+            this.subWayManager.stations.filter(station => !containedStation.includes(station)),
+            this.subWayManager.lines
+            .find(line => line.name === this.subWayManager.currentManagingLine).line
+        );
+    }
+    
     registerHeaderClickEvent() {
         $(SELECTORS.APP).addEventListener("click", (e) => {
             e.preventDefault();
@@ -40,6 +55,9 @@ export default class {
             }
             if (e.target.id === SELECTORS.LINE_MANAGER_BUTTON) {
                 this.renderLineManageTab();
+            }
+            if (e.target.id === SELECTORS.SECTION_MANAGER_BUTTON) {
+                this.renderSectionManageTab();
             }
         });
     }
@@ -68,6 +86,15 @@ export default class {
             }
             if (e.target.className === SELECTORS.LINE_DELETE_BUTTON) {
                 DeleteLine(e.target.dataset.idx);
+            }
+        });
+    }
+    
+    registerSectionManageClickEvent(changeCurrentLine) {
+        $(SELECTORS.MAIN).addEventListener("click", (e) => {
+            e.preventDefault();
+            if (e.target.className === SELECTORS.SECTION_LINE_MENU_BUTTON) {
+                changeCurrentLine(e.target.innerText)
             }
         });
     }

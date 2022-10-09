@@ -14,6 +14,12 @@ export const SELECTORS = {
     LINE_END_STATION_SELECTOR: "line-end-station-selector",
     LINE_ADD_BUTTON: "line-add-button",
     LINE_DELETE_BUTTON: "line-delete-button",
+    SECTION_LINE_MENU_BUTTON: "section-line-menu-button",
+    SECTION_STATION_SELECTOR: "section-station-selector",
+    SECTION_ORDER_INPUT: "section-order-input",
+    SECTION_ADD_BUTTON: "section-add-button",
+    SECTION_DELETE_BUTTON: "section-delete-button",
+    SECTION_DETAIL: "section-detail",
 }
 
 export const ERROR_MSG = {

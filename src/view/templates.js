@@ -78,10 +78,45 @@ export const TEMPLATE = {
 <tr>
     <td>${line.name}</td>
     <td>${line.line[ 0 ].name}</td>
-    <td>${line.line[ lines.length ].name}</td>
+    <td>${line.line.at(- 1).name}</td>
     <td>
     <button class=${SELECTORS.LINE_DELETE_BUTTON} data-idx=${idx}>삭제</button>
     </td>
 </tr>
+    `).join(""),
+    SECTION_MANAGE_LINE_BUTTONS: (lineList) => lineList.map((line, idx) => `
+    <button data-idx=${idx} class=${SELECTORS.SECTION_LINE_MENU_BUTTON}>${line.name}</button>
+    `).join(""),
+    SECTION_MANAGE_TAB: (lineList) => `
+    <h3>구간을 수정할 노선을 선택해주세요.</h3>
+    ${TEMPLATE.SECTION_MANAGE_LINE_BUTTONS(lineList)}
+    <div id=${SELECTORS.SECTION_DETAIL}></div>
+    `,
+    SECTION_DETAIL: (currentLine, stations, currentStations) => `
+    <h3>${currentLine} 관리</h3>
+    <h4>구간 등록</h4>
+    <form>
+        <select id=${SELECTORS.SECTION_STATION_SELECTOR}>
+        ${TEMPLATE.STATION_SELECT_OPTION(stations)}
+        </select>
+        <input type="text" placeholder="순서" id=${SELECTORS.SECTION_ORDER_INPUT}/>
+        <button id=${SELECTORS.SECTION_ADD_BUTTON}>등록</button>
+    </form>
+    <table border="1">
+    <br/>
+    <thead>
+        <td>순서</td>
+        <td>이름</td>
+        <td>설정</td>
+    </thead>
+    ${TEMPLATE.SECTION_TABLE_ITEM(currentStations)}
+</table>
+    `,
+    SECTION_TABLE_ITEM: (currentLineStation) => currentLineStation.map((station, idx) => `
+    <tr>
+        <td>${idx}</td>
+        <td><span>${station.name}</span></td>
+        <td><button class=${SELECTORS.SECTION_DELETE_BUTTON} data-idx=${idx}>노선에서 제거</button></td>
+    </tr>
     `).join(""),
 }

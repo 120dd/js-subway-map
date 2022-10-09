@@ -7,8 +7,9 @@ export default class SubwayManager {
             return SubwayManager.instance;
         }
         SubwayManager.instance = this;
-        this.stations = [];
+        this.stations = [new Station("역삼"), new Station("강남"), new Station("상봉"),];
         this.lines = [];
+        this.currentManagingLine = "";
     }
     
     addStation(name) {
@@ -37,5 +38,10 @@ export default class SubwayManager {
     
     getStations() {
         return this.stations;
+    }
+    
+    changeCurrentLine = (lineName) => {
+        this.currentManagingLine = lineName;
+        return this.currentManagingLine;
     }
 }
