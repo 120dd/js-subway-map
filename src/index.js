@@ -15,7 +15,10 @@ class App {
             this.requestAddLine,
             this.requestDeleteLine,
         )
-        this.view.registerSectionManageClickEvent(this.requestChangeCurrentManageLine);
+        this.view.registerSectionManageClickEvent(
+            this.requestChangeCurrentManageLine,
+            this.requestAddSection,
+        );
     }
     
     requestAddStation = (stationName) => {
@@ -51,9 +54,13 @@ class App {
         this.view.renderLineManageTab();
     }
     
+    requestAddSection = (station, idx) => {
+        this.subwayManager.addSection(station, idx);
+        this.view.renderSectionManageDetatil();
+    }
+    
     requestChangeCurrentManageLine = (newLineName) => {
         this.subwayManager.changeCurrentLine(newLineName);
-        console.log(this.subwayManager.currentManagingLine);
         this.view.renderSectionManageDetatil();
     }
     

@@ -99,7 +99,7 @@ export const TEMPLATE = {
         <select id=${SELECTORS.SECTION_STATION_SELECTOR}>
         ${TEMPLATE.STATION_SELECT_OPTION(stations)}
         </select>
-        <input type="text" placeholder="순서" id=${SELECTORS.SECTION_ORDER_INPUT}/>
+        <input type="text" placeholder="순서" id=${SELECTORS.SECTION_ORDER_INPUT}>
         <button id=${SELECTORS.SECTION_ADD_BUTTON}>등록</button>
     </form>
     <table border="1">

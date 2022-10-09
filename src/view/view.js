@@ -90,11 +90,17 @@ export default class {
         });
     }
     
-    registerSectionManageClickEvent(changeCurrentLine) {
+    registerSectionManageClickEvent(changeCurrentLine, addSection) {
         $(SELECTORS.MAIN).addEventListener("click", (e) => {
             e.preventDefault();
             if (e.target.className === SELECTORS.SECTION_LINE_MENU_BUTTON) {
                 changeCurrentLine(e.target.innerText)
+            }
+            if (e.target.id === SELECTORS.SECTION_ADD_BUTTON) {
+                addSection(
+                    $(SELECTORS.SECTION_STATION_SELECTOR).value,
+                    $(SELECTORS.SECTION_ORDER_INPUT).value
+                );
             }
         });
     }

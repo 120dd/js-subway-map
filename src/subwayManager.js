@@ -8,7 +8,7 @@ export default class SubwayManager {
         }
         SubwayManager.instance = this;
         this.stations = [new Station("역삼"), new Station("강남"), new Station("상봉"),];
-        this.lines = [];
+        this.lines = [new Line({ name: "1호선", start: new Station("역삼"), end: new Station("상봉") })];
         this.currentManagingLine = "";
     }
     
@@ -34,6 +34,12 @@ export default class SubwayManager {
     
     deleteLine(idx) {
         this.lines.splice(idx, 1);
+    }
+    
+    addSection(name, idx) {
+        const targetLine = this.lines.find(line => line.name === this.currentManagingLine);
+        const targetStation = this.stations.find(station => station.name === name);
+        targetLine.line.splice(idx, 0, targetStation);
     }
     
     getStations() {
