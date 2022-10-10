@@ -47,6 +47,10 @@ export default class {
         );
     }
     
+    renderMap() {
+        $(SELECTORS.MAIN).innerHTML = TEMPLATE.MAP_AREA(this.subWayManager.lines);
+    }
+    
     registerHeaderClickEvent() {
         $(SELECTORS.APP).addEventListener("click", (e) => {
             e.preventDefault();
@@ -58,6 +62,9 @@ export default class {
             }
             if (e.target.id === SELECTORS.SECTION_MANAGER_BUTTON) {
                 this.renderSectionManageTab();
+            }
+            if (e.target.id === SELECTORS.MAP_PRINT_MANAGER_BUTTON) {
+                this.renderMap();
             }
         });
     }

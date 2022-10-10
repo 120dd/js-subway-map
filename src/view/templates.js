@@ -119,4 +119,14 @@ export const TEMPLATE = {
         <td><button class=${SELECTORS.SECTION_DELETE_BUTTON} data-idx=${idx}>노선에서 제거</button></td>
     </tr>
     `).join(""),
+    MAP_AREA: (mapInfo) => `
+    <div class="map">${TEMPLATE.MAP_LIST(mapInfo)}</div>
+    `,
+    MAP_LIST: (mapInfo) => mapInfo.map((lineInfo) => `
+    <h3>${lineInfo.name}</h3>
+    <ul>${TEMPLATE.MAP_LIST_ITEM(lineInfo.line)}</ul>
+    `).join(""),
+    MAP_LIST_ITEM: (lineInfo) => lineInfo.map(line => `
+    <li>${line.name}</li>
+    `).join(""),
 }
