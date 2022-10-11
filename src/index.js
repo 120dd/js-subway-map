@@ -26,7 +26,7 @@ class App {
         if (this.validStationName(stationName)) {
             return;
         }
-        this.subwayManager.addStation(stationName);
+        this.subwayManager.addStation(stationName, false);
         this.view.renderStationManageTab();
     }
     
@@ -57,17 +57,17 @@ class App {
     
     requestAddSection = (station, idx) => {
         this.subwayManager.addSection(station, idx);
-        this.view.renderSectionManageDetatil();
+        this.view.renderSectionManageDetail();
     }
     
     requestDeleteSection = (idx) => {
         this.subwayManager.deleteSection(idx);
-        this.view.renderSectionManageDetatil();
+        this.view.renderSectionManageDetail();
     }
     
     requestChangeCurrentManageLine = (newLineName) => {
         this.subwayManager.changeCurrentLine(newLineName);
-        this.view.renderSectionManageDetatil();
+        this.view.renderSectionManageDetail();
     }
     
     validStationName(name) {

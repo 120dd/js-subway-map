@@ -36,12 +36,13 @@ export default class {
         $(SELECTORS.MAIN).innerHTML = TEMPLATE.SECTION_MANAGE_TAB(this.subWayManager.lines);
     }
     
-    renderSectionManageDetatil() {
+    renderSectionManageDetail() {
         const containedStation = this.subWayManager.lines
         .filter(v => v.name === this.subWayManager.currentManagingLine)[ 0 ].line;
         $(SELECTORS.SECTION_DETAIL).innerHTML = TEMPLATE.SECTION_DETAIL(
             this.subWayManager.currentManagingLine,
-            this.subWayManager.stations.filter(station => !containedStation.includes(station)),
+            this.subWayManager.stations.filter(station =>
+                !containedStation.find(stationDetail => stationDetail.name === station.name)),
             this.subWayManager.lines
             .find(line => line.name === this.subWayManager.currentManagingLine).line
         );
