@@ -61,6 +61,11 @@ class App {
     }
     
     requestDeleteSection = (idx) => {
+        const targetLine = this.subwayManager.lines.find(line => line.name === this.subwayManager.currentManagingLine);
+        if (targetLine.line.length < 3) {
+            alert("역이 2개 이하일 때는 노선에서 제거할 수 없습니다.")
+            return;
+        }
         this.subwayManager.deleteSection(idx);
         this.view.renderSectionManageDetail();
     }

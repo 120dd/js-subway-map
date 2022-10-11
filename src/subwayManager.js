@@ -84,6 +84,7 @@ export default class SubwayManager {
     deleteSection(idx) {
         const targetLine = this.lines.find(line => line.name === this.currentManagingLine);
         targetLine.line.splice(idx, 1);
+        setLocalStorage("lines", this.lines);
     }
     
     getStations() {
